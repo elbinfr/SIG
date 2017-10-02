@@ -25,5 +25,6 @@ Route::get('/home', function(){
 });
 
 Route::group(['prefix' => 'message','namespace' => 'Message'], function(){
-	
+	setBreadCrumb('Dashboard','Mensajes recibidos');
+	Route::get('/incoming_message','IncomingMessageController@index');
 });

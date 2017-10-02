@@ -13,6 +13,6 @@
     <a data-toggle="dropdown" class="dropdown-toggle" href="#"> Mensajes <b class="caret"></b></a>
     <ul class="dropdown-menu">
         <li><a href="#">Enviados</a></li>
-        <li><a href="#">Recibidos</a></li>
+        <li><a href="{{url('/message/incoming_message')}}">Recibidos</a></li>
     </ul>
 </li>

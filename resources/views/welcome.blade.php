@@ -33,7 +33,7 @@
 <div class="loginpanel">
     <div class="loginpanelinner">
         <div class="logo animate0 bounceIn"><img src="images/LOGOSIG.png" alt="" /></div>
-        <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('login') }}" id="login">
             {{ csrf_field() }}
             <div class="inputwrapper login-alert">
                 <div class="alert alert-error">Usuario y/o contraseña inválidas</div>
@@ -65,6 +65,8 @@
         </form>
     </div><!--loginpanelinner-->
 </div><!--loginpanel-->
+
+
 
 <div class="loginfooter">
    
