@@ -33,7 +33,7 @@
                 <div class="navbar navbar-fixed-top">
                     <div class="navbar-inner">
                         <div class="container-fluid">
-                            <a class="brand" href="#"><i class="icon-home icon-white"></i>SIG</a>
+                            <a class="brand" href="#"><img src="images/LOGUIYO.png" alt="" style="height: 30px;"/></a>
                             <ul class="nav user_menu pull-right">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
