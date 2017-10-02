@@ -1,95 +1,74 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MOWA SIG</title>
+<link rel="stylesheet" href="css/style.default.css" type="text/css" />
 
-        <title>Laravel</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-migrate-1.1.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.9.2.min.js"></script>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery('#login').submit(function(){
+            var u = jQuery('#username').val();
+            var p = jQuery('#password').val();
+            if(u == '' && p == '') {
+                jQuery('.login-alert').fadeIn();
+                return false;
             }
+        });
+    });
+</script>
+</head>
 
-            .full-height {
-                height: 100vh;
-            }
+<body class="loginpage">
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+<div class="loginpanel">
+    <div class="loginpanelinner">
+        <div class="logo animate0 bounceIn"><img src="images/LOGOSIG.png" alt="" /></div>
+        <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+            {{ csrf_field() }}
+            <div class="inputwrapper login-alert">
+                <div class="alert alert-error">Usuario y/o contraseña inválidas</div>
             </div>
-        </div>
-    </body>
+            <div class="inputwrapper animate1 bounceIn" style="margin-left: 40px">
+                <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="Usuario"required autofocus>
+                @if ($errors->has('username'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('username') }}</strong>
+                    </span>
+                @endif
+            </div>
+            <div class="inputwrapper animate2 bounceIn" style="margin-left: 40px">
+                <input id="password" type="password" class="form-control" name="password" required placeholder="Contraseña">
+
+                @if ($errors->has('password'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
+            </div>
+            <div class="inputwrapper animate3 bounceIn" style="padding: 0 35px; margin-right: 5px; margin-left: 5px" >
+                <button type="submit" name="submit">Ingresar</button>
+            </div>
+            <div class="inputwrapper animate4 bounceIn" style="margin-left: 40px;">
+                <label><input type="checkbox" class="remember" name="remember" {{ old('remember') ? 'checked' : '' }} /> Recuérdame</label>
+            </div>
+            
+        </form>
+    </div><!--loginpanelinner-->
+</div><!--loginpanel-->
+
+<div class="loginfooter">
+   
+</div>
+
+</body>
 </html>
