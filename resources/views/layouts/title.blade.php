@@ -4,10 +4,12 @@
             <a href="#"><i class="icon-folder-open"></i></a>
         </li>
         <li>
-            Menu
+            {{ session()->get('menu') }}
         </li>
-        <li>
-            Submenu
-        </li>
+        @if(session()->has('submenu'))
+            <li>
+                {{ session()->get('submenu') }}
+            </li>
+        @endif
     </ul>
 </div>

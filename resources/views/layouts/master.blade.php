@@ -36,12 +36,18 @@
                             <a class="brand" href="#"><i class="icon-home icon-white"></i>SIG</a>
                             <ul class="nav user_menu pull-right">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Username <b class="caret"></b></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        {{ setUsername() }} <b class="caret"></b>
+                                    </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Perfil</a></li>
                                         <li><a href="#">Another Action</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="#">Salir</a></li>
+                                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Salir</a></li>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
                                     </ul>
                                 </li>
                             </ul>
@@ -60,10 +66,8 @@
                     <nav>
                         @include('layouts.title')
                     </nav>
-
-                    <div class="row-fluid">
-                        Main content 
-                    </div>      
+                    
+                    @yield('main')
                 
                 </div>
             </div>
@@ -95,13 +99,8 @@
             <script src="{{ asset('template/js/selectNav.js') }}"></script>
             <!-- common functions -->
             <script src="{{ asset('template/js/gebo_common.js') }}"></script>
-    
-            <script>
-                $(document).ready(function() {
-                    //* show all elements & remove preloader
-                    setTimeout('$("html").removeClass("js")',1000);
-                });
-            </script>
+
+            @yield('script')
         
         </div>
     </body>
