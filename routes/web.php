@@ -17,14 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', function(){
-
-	setBreadCrumb('Dashboard');
-
-	return view('dashboard.dashboard');
-});
+Route::get('/home', 'Dashboard\DashboardController@index');
 
 Route::group(['prefix' => 'message','namespace' => 'Message'], function(){
-	setBreadCrumb('Dashboard','Mensajes recibidos');
+    Route::get('sent', 'SentController@sentByCorporates');
+    Route::get('sent-by-corporates','SentController@getSentByCorporates');
+
 	Route::get('/incoming_message','IncomingMessageController@index');
+	Route::get('/reportIncoming','IncomingMessageController@showTotalIncoming');
+	Route::get('/reportPositiveIncoming','IncomingMessageController@showPositiveIncoming');
 });
+
+
+

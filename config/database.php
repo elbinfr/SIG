@@ -67,6 +67,19 @@ return [
             'sslmode' => 'prefer',
         ],
 
+        'smsdb' => [
+            'driver' => 'pgsql',
+            'host' => env('SMSDB_HOST', '54.163.233.63'),
+            'port' => env('SMSDB_PORT', '5432'),
+            'database' => env('SMSDB_DATABASE', 'forge'),
+            'username' => env('SMSDB_USERNAME', 'forge'),
+            'password' => env('SMSDB_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'schema' => 'usrsms',
+            'sslmode' => 'prefer',
+        ],
+
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'host' => env('DB_HOST', 'localhost'),

@@ -33,7 +33,7 @@
                 <div class="navbar navbar-fixed-top">
                     <div class="navbar-inner">
                         <div class="container-fluid">
-                            <a class="brand" href="#"><img src="images/LOGUIYO.png" alt="" style="height: 30px;"/></a>
+                            <a class="brand" href="#"><img src="{{ asset('images/LOGUIYO.png')}}" alt="" style="height: 30px;"/></a>
                             <ul class="nav user_menu pull-right">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -99,6 +99,9 @@
             <script src="{{ asset('template/js/selectNav.js') }}"></script>
             <!-- common functions -->
             <script src="{{ asset('template/js/gebo_common.js') }}"></script>
+
+            <script src="{{asset('plugins/Highchart/code/highcharts.js')}}"></script>
+            <script src="{{asset('plugins/Highchart/code/modules/exporting.js')}}"></script>
 
             @yield('script')
         

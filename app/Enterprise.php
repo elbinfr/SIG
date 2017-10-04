@@ -15,5 +15,10 @@ class Enterprise extends Model
     	'status',
     	'client_id'
     ];
+
+    public function users()
+    {
+    	return $this->hasMany('App\User', 'enterprise_id');
+    }
     
 }

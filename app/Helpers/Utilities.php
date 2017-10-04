@@ -23,3 +23,33 @@ function setUsername()
 
 	return $username;
 }
+
+/**
+ * 
+ */
+
+function client_id()
+{
+	$client_id = 0;
+	if (Auth::check()){		
+		$client_id = Auth::user()->enterprise->client_id;
+	}
+
+	return $client_id;
+}
+
+/**
+ * 
+ */
+function setListCorporates()
+{
+	$client = App\Client::where('id', Auth::user()->enterprise->client_id)->first();
+
+    $corporates = $client->corporates;
+
+    $corporates->transform(function ($item, $key) {
+	    return $item['username'] = strtoupper($item['username']);
+	});
+
+	session()->put('list_corporates', $corporates);
+}
