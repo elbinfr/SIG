@@ -20,7 +20,7 @@ class IncomingMessageController extends Controller
 
 		return ReportIncoming::join('corporates', 'corporates.username', 'ilike', 'node')
 								->select(\DB::raw('node, sum(respuestas) as total, sum(positivos) as positivos'))
-								->where('corporates.client_id',4)
+								->where('corporates.client_id', client_id())
 								->where('respuestas','>',0)
 								->whereMonth('fecha', '=', date('m'))
 								->groupBy('node')->orderBy('node')->get();
