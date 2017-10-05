@@ -1,4 +1,4 @@
-<?php $a_mes = ['Enero', 'Febrero', 'Marzo', 'Abriil', 'Mayo', 'Junio', 'Julio', 'Agosto' , 'Setiembre' , 'Octubre', 'Noviembre', 'Diciembre'];?>
+<?php $a_mes = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto' , 'Setiembre' , 'Octubre', 'Noviembre', 'Diciembre'];?>
 {!! Form::open(['url' => $url,
                 'method' => $method,
                 'files' => 'true',
@@ -10,21 +10,21 @@
             <p class="f_legend">Buscar por</p>
             <div class="formSep">
                 <div class="controls span6">
-                    {!! Form::radio('rbFiltro', 'M', ['checked' => 'true'], ['onClick'=> 'prueba()']); !!} Mes
+                    {!! Form::radio('rbFiltro', 'M', ['checked' => 'true'], ['class'=> 'chkb']); !!} Mes
                 </div>
                 <div class="controls span6">
-                    {!! Form::radio('rbFiltro', 'R'); !!} Rango
+                    {!! Form::radio('rbFiltro', 'R', null,['class'=> 'chkb']); !!} Rango
                 </div><br>
             </div>
-            <div class="control-group" >
+            <div class="control-group smonth" >
                 {{ Form::select('number', $a_mes,
-                                    date('m') - 1, ['class' => 'span12']) }}
+                                    date('m') - 1, ['class' => 'span12'], ['id' => 'cbMonth']) }}
             </div>
-            <div class="control-group hidden">
+            <div class="control-group hidden sdate">
                 {!! Form::label('description', 'De') !!}
                 {!! Form::date('name', \Carbon\Carbon::now(), ['class' => 'span12']) !!}
             </div>
-            <div class="control-group hidden">
+            <div class="control-group hidden sdate">
                 {!! Form::label('description', 'A') !!}
                 {!! Form::date('name', \Carbon\Carbon::now(), ['class' => 'span12']) !!}
             </div>

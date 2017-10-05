@@ -1,11 +1,10 @@
 @extends('layouts.master')
 
 @section('main')
-
 <div class="row-fluid">
 
     <div class="span2">
-        @include('partials.report-filter', [ 'url' => '/notebooks',
+        @include('partials.report-filter', [ 'url' => '/',
                                              'method' => 'POST'])
     </div>
     <div class="span10">
@@ -21,7 +20,8 @@
 
     $(function () {
         function getData(){
-            $.get( "{{ url('message/reportIncoming') }}", function( response ) {
+            month = $("#cbMonth").val();
+            $.get( "{{ url('message/reportIncoming') }}", { filtro : month } , function( response ) {
                 var nodes = new Array();
                 var serie1 = new Array();
                 var serie2 = new Array();

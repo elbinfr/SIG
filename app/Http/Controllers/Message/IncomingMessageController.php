@@ -23,7 +23,8 @@ class IncomingMessageController extends Controller
 								->where('corporates.client_id', client_id())
 								->where('respuestas','>',0)
 								->whereMonth('fecha', '=', date('m'))
-								->groupBy('node')->orderBy('node')->get();
+								->groupBy('node')->orderBy('total','desc')->orderBy('positivos','desc')->get();
+
     }
 
 }
