@@ -2,10 +2,14 @@
 
 @section('main')
 	<div class="row-fluid">
-		<div class="span12">
-			<div id="graphic" >
+		<div class="span7">
+			<div id="graphic-bar" >
 			</div>
-		</div>    	
+		</div>
+        <div class="span5">
+            <div id="graphic-pie" >
+            </div>
+        </div>
 	</div>
 @endsection
 
@@ -17,8 +21,8 @@
 			function getData(){
 				$.get( "{{ url('/message/sent-by-corporates') }}", function( response ) {
 					var data = response.data;
-					var categories = new Array();
-					var series = new Array();
+					var categories = [];
+					var series = [];
 
 					$.each(data, function(i,item){
 						categories.push(data[i].corporate_id);
@@ -30,48 +34,86 @@
 			}
 
 			function createGrafic(categories, series){
-				Highcharts.setOptions({
-    				colors: ['#058DC7', '#50B432', '#ED561B', 
-    						'#DDDF00', '#24CBE5', '#64E572', 
-    						'#FF9655', '#FFF263', '#6AF9C4']
-				});
-				
-				Highcharts.chart('graphic', {
-				    chart: {
-				        type: 'column'
-				    },
-				    title: {
-				        text: 'Total de Mensajes Enviados Por Cobs'
-				    },
-				    xAxis: {
-				        categories: categories,
-				        crosshair: true
-				    },
-				    yAxis: {
-				        min: 0,
-				        title: {
-				            text: 'Total Mensajes Enviados'
-				        }
-				    },
-				    tooltip: {
-				        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-				        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-				            '<td style="padding:0"><b>{point.y:.1f} sms</b></td></tr>',
-				        footerFormat: '</table>',
-				        shared: true,
-				        useHTML: true
-				    },
-				    plotOptions: {
-				        column: {
-				            pointPadding: 0.2,
-				            borderWidth: 0
-				        }
-				    },
-				    series: [{
-				        name: 'Cantidad de Mensajes',
-				        data: series
-				    }]
-				});
+
+                Highcharts.chart('graphic-bar', {
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: 'Total de Mensajes Enviados Por Cobs'
+                    },
+                    subtitle: {
+                        text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+                    },
+                    xAxis: {
+                        categories: categories,
+                        title: {
+                            text: null
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Cantidad de Mensajes Enviados',
+                            align: 'high'
+                        },
+                        labels: {
+                            overflow: 'justify'
+                        }
+                    },
+                    tooltip: {
+                        valueSuffix: ' sms'
+                    },
+                    plotOptions: {
+                        bar: {
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: [{
+                        name: 'Cantidad de Mensajes',
+                        data: series
+                    }]
+                });
+
+                //GRAPHIC PIE
+                var data_pie = generateDataGraphicPie(categories, series);
+                Highcharts.chart('graphic-pie', {
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: 'Browser market shares January, 2015 to May, 2015'
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                style: {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                }
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Cantidad SMS',
+                        colorByPoint: true,
+                        data: data_pie
+                    }]
+                });
 				
 			}
 
