@@ -42,7 +42,7 @@
                     type: 'bar'
                 },
                 title: {
-                    text: 'Reporte de mensajes recibidos'
+                    text: 'SMS Recibidos vs Positivos'
                 },
                 subtitle: {
                     text: 'Origen: <a href="http://www.mowa.com.pe/MES/">mowa.com.pe</a>'
@@ -56,7 +56,7 @@
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Population (millions)',
+                        text: 'Mensajes (unidades)',
                         align: 'high'
                     },
                     labels: {
