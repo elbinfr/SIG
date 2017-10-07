@@ -12,3 +12,9 @@
             $(".smonth").addClass('hidden');
         }
     });
+
+    $( ".frmilter" ).submit(function(event) {
+        event.preventDefault();
+        $("#container").empty();
+        getData();
+    });

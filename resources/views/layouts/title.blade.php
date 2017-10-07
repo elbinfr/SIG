@@ -11,5 +11,10 @@
                 {{ session()->get('submenu') }}
             </li>
         @endif
+        @if(session()->has('item'))
+            <li>
+                {{ session()->get('item') }}
+            </li>
+        @endif
     </ul>
 </div>

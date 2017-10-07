@@ -3,7 +3,7 @@
                 'method' => $method,
                 'files' => 'true',
                 'data-parsley-validate' => '',
-                'class' => 'well'
+                'class' => 'frmilter well'
             ]) !!}
 
         <fieldset>
@@ -18,15 +18,15 @@
             </div>
             <div class="control-group smonth" >
                 {{ Form::select('number', $a_mes,
-                                    date('m') - 1, ['class' => 'span12'], ['id' => 'cbMonth']) }}
+                                    date('m') - 1, ['class' => 'span12 cbMonth']) }}
             </div>
             <div class="control-group hidden sdate">
-                {!! Form::label('description', 'De') !!}
-                {!! Form::date('name', \Carbon\Carbon::now(), ['class' => 'span12']) !!}
+                {!! Form::label('from', 'De') !!}
+                {!! Form::date('name', \Carbon\Carbon::now(), ['class' => 'span12 from']) !!}
             </div>
             <div class="control-group hidden sdate">
-                {!! Form::label('description', 'A') !!}
-                {!! Form::date('name', \Carbon\Carbon::now(), ['class' => 'span12']) !!}
+                {!! Form::label('to', 'A') !!}
+                {!! Form::date('name', \Carbon\Carbon::now(), ['class' => 'span12 to']) !!}
             </div>
             <div class="control-group">
                 <div class="controls">

@@ -100,10 +100,13 @@
             <!-- common functions -->
             <script src="{{ asset('template/js/gebo_common.js') }}"></script>
 
-            <script src="{{asset('plugins/Highchart/code/highcharts.js')}}"></script>
-            <script src="{{asset('plugins/Highchart/code/modules/exporting.js')}}"></script>
+            
+            <script src="{{asset('plugins/Highstock/code/highstock.js')}}"></script>
+            <script src="{{asset('plugins/Highstock/code/modules/exporting.js')}}"></script>
 
             <script src="{{asset('js/events.js')}}"></script>
+            <script src="{{asset('js/functions.js')}}"></script>
+
             @yield('script')
         
         </div>

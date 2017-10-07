@@ -24,9 +24,12 @@ Route::group(['prefix' => 'message','namespace' => 'Message'], function(){
     Route::get('sent-by-corporates','SentController@getSentByCorporates');
 
 	Route::get('/incoming_message','IncomingMessageController@index');
+    Route::get('/trend','IncomingMessageController@trend');
 	Route::get('/reportIncoming','IncomingMessageController@showTotalIncoming');
 	Route::get('/reportPositiveIncoming','IncomingMessageController@showPositiveIncoming');
 });
+
+Route::get('/test', 'TestController@index');
 
 
 

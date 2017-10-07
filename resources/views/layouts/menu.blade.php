@@ -17,6 +17,7 @@
             <a href="#">Recibidos <b class="caret-right"></b></a>
             <ul class="dropdown-menu">
                 <li><a href="{{url('/message/incoming_message')}}" class="ext_disabled">SMS Recibidos vs Positivos</a></li>
+                <li><a href="{{url('/message/trend')}}" class="ext_disabled">Tendencia de respuestas positivas</a></li>
             </ul>
         </li>
     </ul>

@@ -29,7 +29,7 @@ class SentController extends Controller
     					->where('corporates.client_id', '=', client_id())
     					->dateRange(['2017-09-01', '2017-09-30'])
     					->groupBy('sendings.corporate_id')
-    					->orderBy('sendings.corporate_id', 'ASC')
+    					->orderBy('sent_messages', 'DESC')
                      	->get();
 
         return response()->json([

@@ -4,36 +4,43 @@
 <div class="row-fluid">
 
     <div class="span2">
-        @include('partials.report-filter', [ 'url' => '/',
+        @include('partials.report-filter', [ 'url' => 'message/reportIncoming' ,
                                              'method' => 'POST'])
     </div>
     <div class="span10">
 	<div id="container" style="width:100%; height: 400px; margin: 0 auto"></div>
 
-        
+
 	</div>
+
 </div>
 @endsection
 
 @section('script')
+
 <script type="text/javascript">
 
-    $(function () {
+
         function getData(){
-            month = $("#cbMonth").val();
-            $.get( "{{ url('message/reportIncoming') }}", { filtro : month } , function( response ) {
-                var nodes = new Array();
-                var serie1 = new Array();
-                var serie2 = new Array();
+            filter = $('input:radio[name=rbFiltro]:checked').val();
+            month = $(".cbMonth").val();
+            from = $(".from").val();
+            to = $(".to").val();
 
-                $.each(response, function(i, item) {
-                    nodes.push(item['node']);
-                    serie1.push(parseInt(item['total']));
-                    serie2.push(parseInt(item['positivos']));
+            $.get( "{{ url('message/reportIncoming') }}", {filter: filter, month: month, from:from, to:to }
+                , function( response ) {
+                    var nodes = new Array();
+                    var serie1 = new Array();
+                    var serie2 = new Array();
+
+                    $.each(response, function(i, item) {
+                        nodes.push(item['node']);
+                        serie1.push(parseInt(item['total']));
+                        serie2.push(parseInt(item['positivos']));
+                    });
+
+                    createGrafic(nodes, serie1, serie2);
                 });
-
-                createGrafic(nodes, serie1, serie2);
-            });
         }
 
         function createGrafic(nodes, serie1, serie2){
@@ -64,7 +71,7 @@
                     }
                 },
                 tooltip: {
-                    valueSuffix: ' millions'
+                    valueSuffix: ' mensajes'
                 },
                 plotOptions: {
                     bar: {
@@ -89,7 +96,6 @@
         }
 
         getData();
-    });
 
     </script>
 @endsection
