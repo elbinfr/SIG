@@ -103,6 +103,7 @@
             <script src="{{asset('plugins/Highchart/code/highcharts.js')}}"></script>
             <script src="{{asset('plugins/Highchart/code/modules/exporting.js')}}"></script>
 
+            <script src="{{asset('js/constants.js')}}"></script>
             <script src="{{asset('js/functions.js')}}"></script>
 
             @yield('script')

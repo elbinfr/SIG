@@ -23,27 +23,41 @@
 					var data = response.data;
 					var categories = [];
 					var series = [];
+                    var series_pie = [];
+					var colors = [];
+                    var last_color = '';
 
+                    var index = 0;
 					$.each(data, function(i,item){
-						categories.push(data[i].corporate_id);
-						series.push(parseInt(data[i].sent_messages));
+						categories.push(getCobName(data[i].corporate_id));
+                        series_pie.push(parseInt(data[i].sent_messages));
+                        var color_item = list_colors[i];//getColor(index);
+                        console.log(color_item);
+                        colors.push(color_item);
+
+						series.push(
+                            {
+                                y: parseInt(data[i].sent_messages),
+                                color: color_item
+                            }
+                        );
+
+                        last_color = color_item;
+                        index++;
 					});
 
-					createGrafic(categories, series);
+					createGrafic(categories, series, series_pie, colors);
 				});
 			}
 
-			function createGrafic(categories, series){
+			function createGrafic(categories, series, series_pie, colors){
 
                 Highcharts.chart('graphic-bar', {
                     chart: {
                         type: 'bar'
                     },
                     title: {
-                        text: 'Total de Mensajes Enviados Por Cobs'
-                    },
-                    subtitle: {
-                        text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+                        text: 'Envios por supervisor'
                     },
                     xAxis: {
                         categories: categories,
@@ -71,6 +85,9 @@
                             }
                         }
                     },
+                    legend: {
+                        enabled: false
+                    },
                     credits: {
                         enabled: false
                     },
@@ -81,7 +98,9 @@
                 });
 
                 //GRAPHIC PIE
-                var data_pie = generateDataGraphicPie(categories, series);
+
+                var data_pie = generateDataGraphicPie(categories, series_pie, colors);
+
                 Highcharts.chart('graphic-pie', {
                     chart: {
                         plotBackgroundColor: null,
@@ -90,7 +109,7 @@
                         type: 'pie'
                     },
                     title: {
-                        text: 'Browser market shares January, 2015 to May, 2015'
+                        text: 'Envios por supervisor (%)'
                     },
                     tooltip: {
                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -108,13 +127,16 @@
                             }
                         }
                     },
+                    credits: {
+                        enabled: false
+                    },
                     series: [{
                         name: 'Cantidad SMS',
-                        colorByPoint: true,
+                        colorByPoint: false,
                         data: data_pie
                     }]
                 });
-				
+
 			}
 
 			getData();
