@@ -8,9 +8,13 @@ function setBreadCrumb($menu, $submenu = null, $item = null)
 	session()->put('menu', $menu);
 	if(!is_null($submenu)){
 		session()->put('submenu', $submenu);
-	}
+	}else{
+        session()->put('submenu', '');
+    }
     if(!is_null($item)){
         session()->put('item', $item);
+    }else{
+        session()->put('item', '');
     }
 }
 
