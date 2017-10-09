@@ -28,11 +28,11 @@
 </script>
 </head>
 
-<body class="loginpage">
+<body class="loginpage" style="background-image: url(images/loginfondo.png)">
 
 <div class="loginpanel">
     <div class="loginpanelinner">
-        <div class="logo animate0 bounceIn"><img src="images/LOGOSIG.png" alt="" /></div>
+        <div class="logo animate0 bounceIn"><img src="images/siglogo.png" alt="" /></div>
         <form method="POST" action="{{ route('login') }}" id="login">
             {{ csrf_field() }}
             <div class="inputwrapper login-alert">

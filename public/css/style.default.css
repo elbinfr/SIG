@@ -53,10 +53,11 @@ a, a:link { color: blue; }
 h4 { font-size: 16px; }
 
 body {
-	background: url(../images/leftpanelbg.png) repeat-y 0 0; font-size: 12px;
+	background: url(../images/loginfondo.png) repeat-y 0 0; font-size: 12px;
 	font-family: 'RobotoRegular', 'Helvetica Neue', Helvetica, sans-serif; }
 body.errorpage { background: #fff url(../images/bg1.png);  }
-body.loginpage { background: #e5e8e7; }
+body.loginpage { background: url(images/loginfondo.png); }
+
 
 a,a:hover,a:link,a:active,a:focus { outline: none; color: #0866c6; text-decoration: none; }
 a:hover { text-decoration: underline; }
@@ -70,8 +71,10 @@ h1,h2,h3,h4,h5 { font-weight: normal; line-height: normal; }
 /*** LOGIN PAGE ***/
 
 .loginpanel { position: absolute; top: 35%; left: 50%; height: 300px; }
-.loginpanelinner { position: relative; top: -140px; left: -50%; }
+.loginpanelinner { position: relative; top: -180px; left: -134%; }
 .loginpanelinner .logo { text-align: center; padding: 20px 0; }
+.frase { width: 400px; height: 80px; text-align: center; }
+.frase p {font-family: 'Helvetica Neue'; font-size: 16px; font-weight: bold; color: #545454;}
 
 .inputwrapper input { border: 0; padding: 10px; background: #fff; width: 250px; }
 .inputwrapper input:active, .inputwrapper input:focus { background: #fff; border: 0; }
