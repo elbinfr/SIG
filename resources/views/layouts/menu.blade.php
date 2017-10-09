@@ -4,7 +4,14 @@
 <li class="dropdown">
     <a data-toggle="dropdown" class="dropdown-toggle" href="#"> Mensajes <b class="caret"></b></a>
     <ul class="dropdown-menu">
-        <li><a href="{{url('/message/sent')}}" class="ext_disabled">Enviados</a></li>
+        <li class="dropdown">
+            <a href="#">Enviados <b class="caret-right"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="{{url('/message/sent')}}" class="ext_disabled">Enviados por supervisor</a></li>
+                <li><a href="#" class="ext_disabled">Enviados por dia</a></li>
+            </ul>
+        </li>
+
         <li class="dropdown">
             <a href="#">Recibidos <b class="caret-right"></b></a>
             <ul class="dropdown-menu">

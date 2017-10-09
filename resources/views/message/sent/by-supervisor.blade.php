@@ -2,6 +2,33 @@
 
 @section('main')
     <div class="row-fluid">
+        <div class="span12">
+            {!! Form::open([
+                'url' => 'message/sent-by-corporates',
+                'method' => 'POST',
+                'class' => 'form-inline well',
+                'id' => 'form']) !!}
+                <div class="row-fluid">
+                    <div class="span2 hidden-phone hidden-tablet">
+                        &nbsp;
+                    </div>
+                    <div class="span3">
+                        {!! Form::label('start_date', 'Desde') !!}
+                        {!! Form::text('start_date', $start_date, ['class' => 'start_date']) !!}
+                    </div>
+                    <div class="span3">
+                        {!! Form::label('end_date', 'Hasta') !!}
+                        {!! Form::text('end_date', $end_date, ['class' => 'end_date']) !!}
+                    </div>
+                    <div class="span2">
+                        <button class="btn btn-info btn-block" type="submit">Mostrar</button>
+                    </div>
+                </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+
+    <div class="row-fluid margin-top-5">
         <div class="span7">
             <div id="graphic-bar" >
             </div>
@@ -15,27 +42,34 @@
 
 @section('script')
 
-	<script>
-		$(function () {
+    <script>
+        $(function () {
 
-			function getData(){
-				$.get( "{{ url('/message/sent-by-corporates') }}", function( response ) {
-					var data = response.data;
-					var categories = [];
-					var series = [];
+            function initEvents(){
+                $('#form').on('submit', function(event){
+                    event.preventDefault();
+                    getData();
+                });
+            }
+
+            function getData(){
+                var parameters = $('#form').serialize();
+                $.post( "{{ url('/message/sent-by-corporates') }}", parameters, function( response ) {
+                    var data = response.data;
+                    var categories = [];
+                    var series = [];
                     var series_pie = [];
-					var colors = [];
+                    var colors = [];
                     var last_color = '';
 
                     var index = 0;
-					$.each(data, function(i,item){
-						categories.push(getCobName(data[i].corporate_id));
+                    $.each(data, function(i,item){
+                        categories.push(getCobName(data[i].corporate_id));
                         series_pie.push(parseInt(data[i].sent_messages));
-                        var color_item = list_colors[i];//getColor(index);
-                        console.log(color_item);
+                        var color_item = list_colors[i];
                         colors.push(color_item);
 
-						series.push(
+                        series.push(
                             {
                                 y: parseInt(data[i].sent_messages),
                                 color: color_item
@@ -44,13 +78,13 @@
 
                         last_color = color_item;
                         index++;
-					});
+                    });
 
-					createGrafic(categories, series, series_pie, colors);
-				});
-			}
+                    createGrafic(categories, series, series_pie, colors);
+                });
+            }
 
-			function createGrafic(categories, series, series_pie, colors){
+            function createGrafic(categories, series, series_pie, colors){
 
                 Highcharts.chart('graphic-bar', {
                     chart: {
@@ -137,10 +171,11 @@
                     }]
                 });
 
-			}
+            }
 
-			getData();
+            initEvents();
+            getData();
 
-		});
-	</script>
+        });
+    </script>
 @endsection
