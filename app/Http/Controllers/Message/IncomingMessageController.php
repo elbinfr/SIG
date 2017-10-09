@@ -12,18 +12,34 @@ class IncomingMessageController extends Controller
     //
 
     public function index(){
-    	setBreadCrumb('Mensajes','Recibidos');
+    	setBreadCrumb('Mensajes','Recibidos', 'SMS Recibidos vs Positivos');
     	return view("message.report-incoming");
     }
 
-    public function showTotalIncoming(){
+    public function trend(){
+        setBreadCrumb('Mensajes','Recibidos', 'Tendencia de respuestas positivas');
+        return view("message.trend-incoming");
+    }
 
-		return ReportIncoming::join('corporates', 'corporates.username', 'ilike', 'node')
-								->select(\DB::raw('node, sum(respuestas) as total, sum(positivos) as positivos'))
-								->where('corporates.client_id',4)
-								->where('respuestas','>',0)
-								->whereMonth('fecha', '=', date('m'))
-								->groupBy('node')->orderBy('node')->get();
+    public function showTotalIncoming(Request $request){
+        $filter = $request->filter;
+        $month = intval($request->month) + 1;
+        $from = $request->from;
+        $to = $request->to;
+
+        $query = IncomingMessage::select(\DB::raw('corporate_id as node, sum(total) as total, sum(positive) as positivos'))
+            ->where('enterprise_id', client_id());
+
+        if($filter == 'M'){
+            $query = $query->whereMonth('received_date', '=', $month)
+                ->groupBy('corporate_id')->orderBy('total','desc')->orderBy('positivos','desc')->get();
+        }else{
+            $query = $query->whereBetween('received_date', [$from, $to])
+                ->groupBy('node')->orderBy('total','desc')->orderBy('positivos','desc')->get();
+        }
+
+		return $query;
+
     }
 
 }

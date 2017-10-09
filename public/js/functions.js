@@ -1,4 +1,29 @@
 /*
+* SEARCH ITEM IN ARRAY
+ */
+function getIndexArray(search, data){
+    var index_found = -1;
+    data.forEach(function(element, index){
+        if(search === element){
+            index_found = index;
+            return true;
+        }
+    });
+
+    return index_found;
+}
+
+/*
+* GET COB'S NAME
+ */
+function getCobName(name){
+    var index = name.indexOf("cob");
+    var cob_name = name.substring(index);
+
+    return cob_name;
+}
+
+/*
 * GET TOTAL AMOUNT OF ARRAY
  */
 function getTotalAmount(data){
@@ -29,14 +54,15 @@ function getPercentFromArray(data){
 /*
 * GENERATE DATA JSON FOR GRAPHIC PIE
  */
-function generateDataGraphicPie(data_names, data_amount){
+function generateDataGraphicPie(data_names, data_amount, data_colors){
     var data_pie = [];
     var data_percent = getPercentFromArray(data_amount);
 
     for(var i=0; i < data_names.length; i++){
         data_pie.push({
             name: data_names[i],
-            y: data_percent[i]
+            y: data_percent[i],
+            color: data_colors[i]
         });
     }
 
