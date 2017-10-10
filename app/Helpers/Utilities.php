@@ -60,3 +60,10 @@ function setListCorporates()
 
 	session()->put('list_corporates', $corporates);
 }
+
+/*
+ * Convert String(d/m/Y) to date (Y-m-d)
+ */
+function stringToDate($date){
+    return \Carbon\Carbon::createFromFormat('d/m/Y',$date)->format('Y-m-d');
+}

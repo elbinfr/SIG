@@ -19,6 +19,10 @@
         <link rel="stylesheet" href="{{ asset('template/css/blue.css') }}"  id="link_theme"/>
         <!-- main styles -->
         <link rel="stylesheet" href="{{ asset('template/css/style.css') }}" />
+
+        <link rel="stylesheet" href="{{ asset('template/lib/datepicker/datepicker.css') }}" />
+
+        <link rel="stylesheet" href="{{ asset('css/custom-mowa.css') }}" />
             
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans" />
     
@@ -86,6 +90,10 @@
             <script src="{{ asset('template/js/bootstrap.plugins.min.js') }}"></script>
             <!-- tooltips -->
             <script src="{{ asset('template/lib/qtip2/jquery.qtip.min.js') }}"></script>
+            <!-- datepicker -->
+            <script src="{{ asset('template/lib/datepicker/bootstrap-datepicker.min.js') }}"></script>
+            <!-- timepicker -->
+            <script src="{{ asset('template/lib/datepicker/bootstrap-timepicker.min.js') }}"></script>
 
             <!-- jBreadcrumbs -->
             <script src="{{ asset('template/lib/jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min.js') }}"></script>
@@ -100,7 +108,6 @@
             <!-- common functions -->
             <script src="{{ asset('template/js/gebo_common.js') }}"></script>
 
-
             <script src="{{asset('plugins/Highstock/code/highstock.js')}}"></script>
             <script src="{{asset('plugins/Highstock/code/modules/exporting.js')}}"></script>
 
@@ -110,6 +117,7 @@
             <script src="{{asset('js/constants.js')}}"></script>
             <script src="{{asset('js/events.js')}}"></script>
             <script src="{{asset('js/functions.js')}}"></script>
+            <script src="{{asset('js/elements.js')}}"></script>
 
             @yield('script')
         

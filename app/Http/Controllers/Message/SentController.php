@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 
 use App\Sending;
 use Carbon\Carbon;
-use HighCharts;
 
 class SentController extends Controller
 {
@@ -16,18 +15,24 @@ class SentController extends Controller
      */
     public function sentByCorporates()
     {
-    	setBreadCrumb('Mensajes', 'Enviados');
+    	setBreadCrumb('Mensajes', 'Enviados', 'Envios por supervisor');
 
-    	return view('message.sent');
+    	$start_date = Carbon::now()->day(1)->format('d/m/Y');
+    	$end_date = Carbon::now()->format('d/m/Y');
+
+    	return view('message.sent.by-supervisor', compact('start_date', 'end_date'));
     }
 
-    public function getSentByCorporates()
+    public function getSentByCorporates(Request $request)
     {
+        $start_date = stringToDate($request->start_date);
+        $end_date = stringToDate($request->end_date);
+
     	$sendings = Sending::join('corporates', 'corporates.username', '=', 'sendings.corporate_id')
     					->select(
     						\DB::raw('sendings.corporate_id, sum(sendings.sent_messages) as sent_messages'))    					
     					->where('corporates.client_id', '=', client_id())
-    					->dateRange(['2017-09-01', '2017-09-30'])
+    					->dateRange([$start_date, $end_date])
     					->groupBy('sendings.corporate_id')
     					->orderBy('sent_messages', 'DESC')
                      	->get();
@@ -37,4 +42,5 @@ class SentController extends Controller
                     'data'   => $sendings
                 ]);
     }
+
 }

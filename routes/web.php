@@ -20,9 +20,9 @@ Auth::routes();
 Route::get('/home', 'Dashboard\DashboardController@index');
 Route::get('/getSendingToday', 'Dashboard\DashboardController@getSendingToday');
 
-Route::group(['prefix' => 'message','namespace' => 'Message'], function(){
+Route::group(['middleware' => 'auth', 'prefix' => 'message','namespace' => 'Message'], function(){
     Route::get('sent', 'SentController@sentByCorporates');
-    Route::get('sent-by-corporates','SentController@getSentByCorporates');
+    Route::post('sent-by-corporates','SentController@getSentByCorporates');
 
 	Route::get('/incoming_message','IncomingMessageController@index');
     Route::get('/trend','IncomingMessageController@trend');
