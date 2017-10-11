@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Sending;
 use Carbon\Carbon;
+use Validator;
 
 class SentController extends Controller
 {
@@ -25,6 +26,18 @@ class SentController extends Controller
 
     public function getSentByCorporates(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'start_date' => 'required|date|before_or_equal:now',
+            'end_date' => 'required|date|after_or_equal:start_date'
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'status' => 422,
+                'data' => $validator->errors()
+            ]);
+        }
+
         $start_date = stringToDate($request->start_date);
         $end_date = stringToDate($request->end_date);
 
@@ -32,6 +45,7 @@ class SentController extends Controller
     					->select(
     						\DB::raw('sendings.corporate_id, sum(sendings.sent_messages) as sent_messages'))    					
     					->where('corporates.client_id', '=', client_id())
+                        ->where('sendings.process_status', '=', 7)
     					->dateRange([$start_date, $end_date])
     					->groupBy('sendings.corporate_id')
     					->orderBy('sent_messages', 'DESC')

@@ -14,11 +14,11 @@
                     </div>
                     <div class="span3">
                         {!! Form::label('start_date', 'Desde') !!}
-                        {!! Form::text('start_date', $start_date, ['class' => 'start_date']) !!}
+                        {!! Form::text('start_date', $start_date, ['class' => 'date']) !!}
                     </div>
                     <div class="span3">
                         {!! Form::label('end_date', 'Hasta') !!}
-                        {!! Form::text('end_date', $end_date, ['class' => 'end_date']) !!}
+                        {!! Form::text('end_date', $end_date, ['class' => 'date']) !!}
                     </div>
                     <div class="span2">
                         <button class="btn btn-info btn-block" type="submit">Mostrar</button>
@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <div class="row-fluid margin-top-5" id="graphic">
+    <div class="row-fluid margin-top-5 graphic" id="graphic">
         <div class="span7">
             <div id="graphic-bar" >
             </div>
@@ -44,8 +44,27 @@
 
     <script>
         $(function () {
+            var graphic = $('#graphic');
+
+            loadPage();
+
+            function loadPage(){
+                initEvents();
+                getData();
+            }
 
             function initEvents(){
+
+                $(document).ajaxStart(function() {
+                    graphic.loading({
+                        message: 'Procesando...'
+                    });
+                });
+
+                $(document).ajaxStop(function() {
+                    graphic.loading('stop');
+                });
+
                 $('#form').on('submit', function(event){
                     event.preventDefault();
                     getData();
@@ -56,38 +75,55 @@
                 var parameters = $('#form').serialize();
                 $.post( "{{ url('/message/sent-by-corporates') }}", parameters, function( response ) {
                     var data = response.data;
-                    var categories = [];
-                    var series = [];
-                    var series_pie = [];
-                    var colors = [];
-                    var last_color = '';
+                    if(response.status === 422){
+                        var message = '';
 
-                    var index = 0;
-                    var total = 0;
-                    $.each(data, function(i,item){
-                        total = total + parseInt(data[i].sent_messages);
-                        categories.push(getCobName(data[i].corporate_id));
-                        series_pie.push(parseInt(data[i].sent_messages));
-                        var color_item = list_colors[i];
-                        colors.push(color_item);
+                        $.each(response.data, function(index, item) {
+                            $.each(item, function(index1, error) {
+                                message = message + '<li>'+error+'</li>';
+                            });
+                        });
+                        console.log(message);
+                        swal({
+                            type: "error",
+                            title: "Error!",
+                            html: true,
+                            text: '<ul>'+message+'</ul>'
+                        });
+                    }else if(response.status === 200){
+                        var categories = [];
+                        var series = [];
+                        var series_pie = [];
+                        var colors = [];
+                        var last_color = '';
 
-                        series.push(
-                            {
-                                y: parseInt(data[i].sent_messages),
-                                color: color_item
-                            }
-                        );
+                        var index = 0;
+                        var total = 0;
+                        $.each(data, function(i,item){
+                            total = total + parseInt(data[i].sent_messages);
+                            categories.push(getCobName(data[i].corporate_id));
+                            series_pie.push(parseInt(data[i].sent_messages));
+                            var color_item = list_colors[i];
+                            colors.push(color_item);
 
-                        last_color = color_item;
-                        index++;
-                    });
+                            series.push(
+                                {
+                                    y: parseInt(data[i].sent_messages),
+                                    color: color_item
+                                }
+                            );
 
-                    createGrafic(categories, series, series_pie, colors, total);
+                            last_color = color_item;
+                            index++;
+                        });
+
+                        createGraphicBar(categories, series, total);
+                        createGraphicPie(categories, series_pie, colors);
+                    }
                 });
             }
 
-            function createGrafic(categories, series, series_pie, colors, total){
-
+            function createGraphicBar(categories, series, total){
                 Highcharts.chart('graphic-bar', {
                     chart: {
                         type: 'bar'
@@ -132,9 +168,9 @@
                         data: series
                     }]
                 });
+            }
 
-                //GRAPHIC PIE
-
+            function createGraphicPie(categories, series_pie, colors){
                 var data_pie = generateDataGraphicPie(categories, series_pie, colors);
 
                 Highcharts.chart('graphic-pie', {
@@ -172,20 +208,7 @@
                         data: data_pie
                     }]
                 });
-
             }
-
-            $(document).ajaxStart(function() {
-                //graphic.show();
-                $('#graphic').loading();
-            });
-
-            $(document).ajaxStop(function() {
-                $('#graphic').loading('stop');
-            });
-
-            initEvents();
-            getData();
 
         });
     </script>
