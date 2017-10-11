@@ -23,6 +23,8 @@ Route::get('/getSendingToday', 'Dashboard\DashboardController@getSendingToday');
 Route::group(['middleware' => 'auth', 'prefix' => 'message','namespace' => 'Message'], function(){
     Route::get('sent', 'SentController@sentByCorporates');
     Route::post('sent-by-corporates','SentController@getSentByCorporates');
+    Route::get('sent-by-day', 'SentController@sentByDay');
+    Route::get('get-data-by-day', 'SentController@getSentMessagesByDate');
 
 	Route::get('/incoming_message','IncomingMessageController@index');
     Route::get('/trend','IncomingMessageController@trend');

@@ -22,6 +22,7 @@
 
 
         function getData(){
+            $('#container').loading();
             filter = $('input:radio[name=rbFiltro]:checked').val();
             month = $(".cbMonth").val();
             from = $(".from").val();
@@ -44,6 +45,7 @@
         }
 
         function createGrafic(nodes, serie1, serie2){
+            $('#container').loading('stop');
             var options = {
                 chart: {
                     type: 'bar'
@@ -96,6 +98,9 @@
         }
 
         getData();
+
+
+
 
     </script>
 @endsection

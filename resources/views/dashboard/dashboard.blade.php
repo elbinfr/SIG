@@ -2,7 +2,7 @@
 
 @section('main')
 <div class="row-fluid">
-    <div id="gantt_here" style='width:100%; min-height: 100vh;'></div>
+    <div id="gantt_here" style='width:100%; min-height: 500px;; max-height: 500px;'></div>
 </div>
 @endsection
 
@@ -11,6 +11,7 @@
     <script type="text/javascript">
 
         function getData(){
+            $('#gantt_here').loading();
             $.get( "{{ url('getSendingToday') }}"
                 , function( response ) {
 
@@ -20,6 +21,7 @@
         }
 
         function createGantt(response){
+            $('#gantt_here').loading("stop");
             gantt.config.columns = [
                 {name:"text",       label:"Campaña",  width:"*", tree:true },
                 {name:"duration",   label:"Duración (mn)",   align: "center" }
@@ -35,7 +37,7 @@
 
             gantt.config.subscales = [
                 {unit:"day", step:1, date : "%j %F, %l"},
-                {unit:"minute", step:10, date : "%i"}
+                {unit:"minute", step:5, date : "%i"}
             ];
 
             gantt.init("gantt_here");
