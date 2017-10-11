@@ -107,9 +107,12 @@
             <script src="{{ asset('template/js/selectNav.js') }}"></script>
             <!-- common functions -->
             <script src="{{ asset('template/js/gebo_common.js') }}"></script>
-            
+
             <script src="{{asset('plugins/Highstock/code/highstock.js')}}"></script>
             <script src="{{asset('plugins/Highstock/code/modules/exporting.js')}}"></script>
+
+            <script src="{{asset('plugins/gantt/codebase/dhtmlxgantt.js')}}" type="text/javascript" charset="utf-8"></script>
+            <link rel="stylesheet" href="{{asset('plugins/gantt/codebase/dhtmlxgantt.css')}}" type="text/css" media="screen" title="no title" charset="utf-8">
 
             <script src="{{asset('js/constants.js')}}"></script>
             <script src="{{asset('js/events.js')}}"></script>

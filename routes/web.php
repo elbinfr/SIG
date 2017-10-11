@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'Dashboard\DashboardController@index');
+Route::get('/getSendingToday', 'Dashboard\DashboardController@getSendingToday');
 
 Route::group(['middleware' => 'auth', 'prefix' => 'message','namespace' => 'Message'], function(){
     Route::get('sent', 'SentController@sentByCorporates');
@@ -29,7 +30,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'message','namespace' => 'Mess
 	Route::get('/reportPositiveIncoming','IncomingMessageController@showPositiveIncoming');
 });
 
-Route::get('/test', 'TestController@index');
+Route::get('/test', 'Dashboard\DashboardController@getSendingToday');
 
 
 
