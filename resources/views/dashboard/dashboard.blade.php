@@ -22,7 +22,7 @@
         function createGantt(response){
             gantt.config.columns = [
                 {name:"text",       label:"Campaña",  width:"*", tree:true },
-                {name:"duration",   label:"Duración",   align: "center" }
+                {name:"duration",   label:"Duración (mn)",   align: "center" }
             ];
             gantt.config.xml_date="%Y-%m-%d %H:%i";
             gantt.config.scale_unit = "hour";
