@@ -22,6 +22,10 @@
 
         <link rel="stylesheet" href="{{ asset('template/lib/datepicker/datepicker.css') }}" />
 
+        <link rel="stylesheet" href="{{asset('plugins/gantt/codebase/dhtmlxgantt.css')}}" type="text/css">
+
+        <link rel="stylesheet" href="{{ asset('plugins/loading/jquery.loading.css') }}" />
+
         <link rel="stylesheet" href="{{ asset('css/custom-mowa.css') }}" />
             
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans" />
@@ -112,7 +116,8 @@
             <script src="{{asset('plugins/Highstock/code/modules/exporting.js')}}"></script>
 
             <script src="{{asset('plugins/gantt/codebase/dhtmlxgantt.js')}}" type="text/javascript" charset="utf-8"></script>
-            <link rel="stylesheet" href="{{asset('plugins/gantt/codebase/dhtmlxgantt.css')}}" type="text/css" media="screen" title="no title" charset="utf-8">
+
+            <script src="{{asset('plugins/loading/jquery.loading.js')}}"></script>
 
             <script src="{{asset('js/constants.js')}}"></script>
             <script src="{{asset('js/events.js')}}"></script>
