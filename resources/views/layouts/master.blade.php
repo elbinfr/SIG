@@ -22,6 +22,8 @@
 
         <link rel="stylesheet" href="{{ asset('template/lib/datepicker/datepicker.css') }}" />
 
+        <link rel="stylesheet" href="{{ asset('plugins/loading/jquery.loading.css') }}" />
+
         <link rel="stylesheet" href="{{ asset('css/custom-mowa.css') }}" />
             
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans" />
@@ -110,6 +112,8 @@
             
             <script src="{{asset('plugins/Highstock/code/highstock.js')}}"></script>
             <script src="{{asset('plugins/Highstock/code/modules/exporting.js')}}"></script>
+
+            <script src="{{asset('plugins/loading/jquery.loading.js')}}"></script>
 
             <script src="{{asset('js/constants.js')}}"></script>
             <script src="{{asset('js/events.js')}}"></script>

@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <div class="row-fluid margin-top-5">
+    <div class="row-fluid margin-top-5" id="graphic">
         <div class="span7">
             <div id="graphic-bar" >
             </div>
@@ -63,7 +63,9 @@
                     var last_color = '';
 
                     var index = 0;
+                    var total = 0;
                     $.each(data, function(i,item){
+                        total = total + parseInt(data[i].sent_messages);
                         categories.push(getCobName(data[i].corporate_id));
                         series_pie.push(parseInt(data[i].sent_messages));
                         var color_item = list_colors[i];
@@ -80,11 +82,11 @@
                         index++;
                     });
 
-                    createGrafic(categories, series, series_pie, colors);
+                    createGrafic(categories, series, series_pie, colors, total);
                 });
             }
 
-            function createGrafic(categories, series, series_pie, colors){
+            function createGrafic(categories, series, series_pie, colors, total){
 
                 Highcharts.chart('graphic-bar', {
                     chart: {
@@ -120,13 +122,13 @@
                         }
                     },
                     legend: {
-                        enabled: false
+                        enabled: true
                     },
                     credits: {
                         enabled: false
                     },
                     series: [{
-                        name: 'Cantidad de Mensajes',
+                        name: 'TOTAL DE MENSAJES ENVIADOS: ' + total + ' sms',
                         data: series
                     }]
                 });
@@ -172,6 +174,15 @@
                 });
 
             }
+
+            $(document).ajaxStart(function() {
+                //graphic.show();
+                $('#graphic').loading();
+            });
+
+            $(document).ajaxStop(function() {
+                $('#graphic').loading('stop');
+            });
 
             initEvents();
             getData();
