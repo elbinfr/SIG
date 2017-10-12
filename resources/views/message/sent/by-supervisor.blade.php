@@ -44,7 +44,8 @@
 
     <script>
         $(function () {
-            var graphic = $('#graphic');
+            var $form = $('#form');
+            var $graphic = $('#graphic');
 
             loadPage();
 
@@ -56,40 +57,28 @@
             function initEvents(){
 
                 $(document).ajaxStart(function() {
-                    graphic.loading({
+                    $graphic.loading({
                         message: 'Procesando...'
                     });
                 });
 
                 $(document).ajaxStop(function() {
-                    graphic.loading('stop');
+                    $graphic.loading('stop');
                 });
 
-                $('#form').on('submit', function(event){
+                $form.on('submit', function(event){
                     event.preventDefault();
                     getData();
                 });
             }
 
             function getData(){
-                var parameters = $('#form').serialize();
-                $.post( "{{ url('/message/sent-by-corporates') }}", parameters, function( response ) {
+                var url = $form.attr('action');
+                var parameters = $form.serialize();
+                $.post( url, parameters, function( response ) {
                     var data = response.data;
                     if(response.status === 422){
-                        var message = '';
-
-                        $.each(response.data, function(index, item) {
-                            $.each(item, function(index1, error) {
-                                message = message + '<li>'+error+'</li>';
-                            });
-                        });
-                        console.log(message);
-                        swal({
-                            type: "error",
-                            title: "Error!",
-                            html: true,
-                            text: '<ul>'+message+'</ul>'
-                        });
+                        showErrorList(response.data);
                     }else if(response.status === 200){
                         var categories = [];
                         var series = [];
@@ -100,15 +89,15 @@
                         var index = 0;
                         var total = 0;
                         $.each(data, function(i,item){
-                            total = total + parseInt(data[i].sent_messages);
-                            categories.push(getCobName(data[i].corporate_id));
-                            series_pie.push(parseInt(data[i].sent_messages));
+                            total = total + parseInt(item.sent_messages);
+                            categories.push(getCobName(item.corporate_id));
+                            series_pie.push(parseInt(item.sent_messages));
                             var color_item = list_colors[i];
                             colors.push(color_item);
 
                             series.push(
                                 {
-                                    y: parseInt(data[i].sent_messages),
+                                    y: parseInt(item.sent_messages),
                                     color: color_item
                                 }
                             );
@@ -158,13 +147,13 @@
                         }
                     },
                     legend: {
-                        enabled: true
+                        enabled: false
                     },
                     credits: {
                         enabled: false
                     },
                     series: [{
-                        name: 'TOTAL DE MENSAJES ENVIADOS: ' + total + ' sms',
+                        name: 'Mensajes enviados',
                         data: series
                     }]
                 });

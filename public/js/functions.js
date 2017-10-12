@@ -69,3 +69,23 @@ function generateDataGraphicPie(data_names, data_amount, data_colors){
     return data_pie;
 
 }
+
+/*
+* SHOW LIST ERRORS IN SWEETALERT
+* @error_list: array with errors mesage
+ */
+function showErrorList(error_list){
+    var message = '';
+    $.each(error_list, function(index, item) {
+        $.each(item, function(index1, error) {
+            message = message + '<li>'+error+'</li>';
+        });
+    });
+
+    swal({
+        type: "error",
+        title: "Error!",
+        html: true,
+        text: '<ul style="text-align: left;">'+message+'</ul>'
+    });
+}

@@ -26,8 +26,9 @@ class SentController extends Controller
 
     public function getSentByCorporates(Request $request)
     {
+        $today = Carbon::today()->format('d/m/Y');
         $validator = Validator::make($request->all(), [
-            'start_date' => 'required|date|before_or_equal:now',
+            'start_date' => 'required|date|before_or_equal:'.$today,
             'end_date' => 'required|date|after_or_equal:start_date'
         ]);
 
