@@ -26,6 +26,8 @@
 
         <link rel="stylesheet" href="{{ asset('plugins/loading/jquery.loading.css') }}" />
 
+        <link rel="stylesheet" href="{{ asset('plugins/sweetalert/js/sweetalert.css') }}" />
+
         <link rel="stylesheet" href="{{ asset('css/custom-mowa.css') }}" />
             
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans" />
@@ -69,7 +71,7 @@
             
             <!-- main content -->
             <div id="contentwrapper">
-                <div class="main_content">
+                <div class="main_content" id="main_content">
 
                     <nav>
                         @include('layouts.title')
@@ -98,6 +100,7 @@
             <script src="{{ asset('template/lib/datepicker/bootstrap-datepicker.min.js') }}"></script>
             <!-- timepicker -->
             <script src="{{ asset('template/lib/datepicker/bootstrap-timepicker.min.js') }}"></script>
+            <script src="{{ asset('template/lib/datepicker/locales/bootstrap-datepicker.es.js') }}"></script>
 
             <!-- jBreadcrumbs -->
             <script src="{{ asset('template/lib/jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min.js') }}"></script>
@@ -118,6 +121,8 @@
             <script src="{{asset('plugins/gantt/codebase/dhtmlxgantt.js')}}" type="text/javascript" charset="utf-8"></script>
 
             <script src="{{asset('plugins/loading/jquery.loading.js')}}"></script>
+
+            <script src="{{ asset('plugins/sweetalert/js/sweetalert.min.js') }}"></script>
 
             <script src="{{asset('js/constants.js')}}"></script>
             <script src="{{asset('js/events.js')}}"></script>
