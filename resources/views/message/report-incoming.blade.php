@@ -22,7 +22,7 @@
 
 
         function getData(){
-            $('#container').loading();
+            $('#container').loading({message: 'Procesando...'});
             filter = $('input:radio[name=rbFiltro]:checked').val();
             month = $(".cbMonth").val();
             from = $(".from").val();

@@ -11,7 +11,7 @@
 
 @section('script')
     <script type="text/javascript">
-        $('#graphic-line').loading();
+        $('#graphic-line').loading({message: 'Procesando...'});
         $.getJSON('{{url('/message/get-data-by-day')}}', function (data) {
             // Create the chart
             Highcharts.stockChart('graphic-line', {
