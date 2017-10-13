@@ -28,8 +28,8 @@ class SentController extends Controller
     {
         $today = Carbon::today()->format('d/m/Y');
         $validator = Validator::make($request->all(), [
-            'start_date' => 'required|date|before_or_equal:'.$today,
-            'end_date' => 'required|date|after_or_equal:start_date'
+            'start_date' => 'required|date_format:"d/m/Y"|before_or_equal:'.$today,
+            'end_date' => 'required|date_format:"d/m/Y"|after_or_equal:start_date'
         ]);
 
         if($validator->fails()){

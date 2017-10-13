@@ -45,7 +45,7 @@ function getPercentFromArray(data){
 
     data.forEach(function(element){
         var total_item = parseInt(element) / total_amount;
-        percent.push(parseFloat(total_item.toFixed(2)));
+        percent.push(parseFloat(total_item.toFixed(3)));
     });
 
     return percent;
