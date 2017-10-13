@@ -1,36 +1,26 @@
-
 @extends('layouts.master')
 
 @section('main')
     <div class="row-fluid">
-
         <div class="span12">
-            <div id="container" style="width:100%; height: 400px; margin: 0 auto"></div>
-
+            <div id="graphic-line" style="min-height: 400px;">
+            </div>
         </div>
-
     </div>
 @endsection
 
 @section('script')
-
-
     <script type="text/javascript">
-
-
-        $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function (data) {
+        $('#graphic-line').loading({message: 'Procesando...'});
+        $.getJSON('{{url('/message/get-data-by-day')}}', function (data) {
             // Create the chart
-            Highcharts.stockChart('container', {
-
-
+            Highcharts.stockChart('graphic-line', {
                 rangeSelector: {
                     selected: 1
                 },
-
                 title: {
-                    text: 'Tendencia de respuestas positivas'
+                    text: 'Envios por día'
                 },
-
                 series: [{
                     name: 'AAPL',
                     data: data,
@@ -39,7 +29,7 @@
                     }
                 }]
             });
+            $('#graphic-line').loading('stop');
         });
-
     </script>
 @endsection

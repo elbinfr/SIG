@@ -17,7 +17,8 @@ class DashboardController extends Controller
     }
 
     public function getSendingToday(){
-        return $sendings = ganttSendings::where('client_id', '=', client_id())
+
+        return $sendings = ganttSendings::where('client_id','=', client_id())
             ->whereDate('start_date', date('Y-m-d'))
             ->orderBy('start_date')
             ->get();
