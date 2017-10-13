@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MOWA SIG</title>
 <link rel="stylesheet" href="{{ asset('css/style.default.css') }}" type="text/css" />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
 
 <script type="text/javascript" src="{{ asset('js/jquery-1.9.1.min.js')}}"></script>
@@ -28,7 +29,7 @@
 </script>
 </head>
 
-<body class="loginpage" style="background-image: url(images/loginfondo.png)">
+<body class="loginpage">
 
 <div class="loginpanel">
     <div class="loginpanelinner">
@@ -42,7 +43,7 @@
                 <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="Usuario"required autofocus>
                 @if ($errors->has('username'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('username') }}</strong>
+                        <strong>{{ $errors->first('username') }}</strong> 
                     </span>
                 @endif
             </div>
