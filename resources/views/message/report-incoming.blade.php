@@ -35,7 +35,7 @@
                     var serie2 = new Array();
 
                     $.each(response, function(i, item) {
-                        nodes.push(item['node']);
+                        nodes.push(getCobName(item['node'].toLowerCase()));
                         serie1.push(parseInt(item['total']));
                         serie2.push(parseInt(item['positivos']));
                     });
